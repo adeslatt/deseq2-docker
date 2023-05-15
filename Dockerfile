@@ -21,8 +21,8 @@ RUN apt-get update && \
 # an accessible location for execution at the command line with
 # the docker file
 #
-ADD ./your-script-name.R /usr/local/bin/
+ADD ./DESeq2.R /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/your-script-name.R
+RUN chmod +x /usr/local/bin/DESeq2.R
 
 
