@@ -10,7 +10,7 @@ de_input <- as.matrix(data[,-1])
 row.names(de_input) <- data$gene_id
 
 #object construction
-dds <- DESeqDataSetFromMatrix(coundData = round(de_input),
+dds <- DESeqDataSetFromMatrix(countData = round(de_input),
                               colData = data.frame(colnames(de_input)),
                               design = ~1)
 
