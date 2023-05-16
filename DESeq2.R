@@ -1,6 +1,7 @@
 library(DESeq2)
 library(tidyverse)
 library(magrittr) 
+library(genefilter)
 
 #take input from combined matrix
 matrix <- commandArgs(trailingOnly=TRUE)
@@ -8,15 +9,10 @@ data <- read.csv(matrix, sep="\t")
 de_input <- as.matrix(data[,-1])
 row.names(de_input) <- data$gene_id
 
-meta_df <- data.frame( Sample = names(data[-1])) %>% 
-  mutate(
-    Type = gsub("-.*","", Sample) %>% gsub("[.].*","", .)
-  )
-
 #object construction
-dds <- DESeqDataSetFromMatrix(round(de_input),
-                              meta_df,
-                              design = ~Type)
+dds <- DESeqDataSetFromMatrix(coundData = round(de_input),
+                              colData = data.frame(colnames(de_input)),
+                              design = ~1)
 
 #standard DESeq analysis
 dds <- DESeq(dds)
@@ -24,8 +20,6 @@ dds <- DESeq(dds)
 #varianceStabilizingTransformation returns a DESeqTransform if a DESeqDataSet was provided, 
 #or returns a a matrix if a count matrix was provided
 vsd <- varianceStabilizingTransformation(dds)
-
-library(genefilter)
 
 #returns a matrix
 wpn_vsd <- getVarianceStabilizedData(dds)
