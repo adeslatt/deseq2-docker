@@ -18,8 +18,8 @@ Set up an environment variable capturing your current command line:
 PWD=$(pwd)
 ```
 
-Then mount and use your current directory and call the tool now encapsulated within the environment.
+Then mount and use your current directory and call the tool now encapsulated within the environment. The input to DESeq2 is one single matrix.
 
 ```
-docker run -it -v $PWD:$PWD -w $PWD gmsd Rscript gene-median-splitter.R
+docker run -it -v $PWD:$PWD -w $PWD gmsd Rscript combine-matrices.R
 ```

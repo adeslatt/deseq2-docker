@@ -7,9 +7,8 @@ ARG ENV_NAME="deseq2"
 # Since our base image is an R docker base we will use BiocManager install
 
 RUN apt-get update && \ 
-    R -e "install.packages(c('BiocManager'), repos='https://cloud.r-project.org/');BiocManager::install('package-name-here')" && \
+    R -e "install.packages(c('BiocManager'), repos='https://cloud.r-project.org/');BiocManager::install('DESeq2', 'genefilter')" && \
     apt-get clean -y
-
 
 #
 # Jupytext can be used to convert this to a a notebook
@@ -21,8 +20,8 @@ RUN apt-get update && \
 # an accessible location for execution at the command line with
 # the docker file
 #
-ADD ./your-script-name.R /usr/local/bin/
+ADD ./DESeq2.R /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/your-script-name.R
+RUN chmod +x /usr/local/bin/DESeq2.R
 
 
