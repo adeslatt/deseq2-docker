@@ -1,4 +1,6 @@
 library(DESeq2)
+install.packages("tidyverse")
+
 library(tidyverse)
 library(magrittr) 
 library(genefilter)
